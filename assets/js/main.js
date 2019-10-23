@@ -1,5 +1,5 @@
 /*
-	Road Trip by TEMPLATED
+	Radius by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
@@ -19,9 +19,7 @@
 		var	$window = $(window),
 			$body = $('body'),
 			$header = $('#header'),
-			$banner = $('#banner');
-
-		var $height = $('#header').height();
+			$footer = $('#footer');
 
 		// Disable animations/transitions until the page has loaded.
 			$body.addClass('is-loading');
@@ -43,84 +41,39 @@
 				);
 			});
 
-		// Banner
+		// Header.
+			$header.each( function() {
 
-			if ($banner.length > 0) {
+				var t 		= jQuery(this),
+					button 	= t.find('.button');
 
-				// IE: Height fix.
-					if (skel.vars.browser == 'ie'
-					&&	skel.vars.IEVersion > 9) {
+				button.click(function(e) {
 
-						skel.on('-small !small', function() {
-							$banner.css('height', '100vh');
-						});
+					t.toggleClass('hide');
 
-						skel.on('+small', function() {
-							$banner.css('height', '');
-						});
-
+					if ( t.hasClass('preview') ) {
+						return true;
+					} else {
+						e.preventDefault();
 					}
 
-				// More button.
-					$banner.find('.more')
-						.addClass('scrolly');
-
-			}
-
-
-		// Get BG Image
-
-			if ( $( ".bg-img" ).length ) {
-
-				$( ".bg-img" ).each(function() {
-
-					var post 	= $(this),
-						bg 		= post.data('bg');
-
-					post.css( 'background-image', 'url(images/' + bg + ')' );
-
-				});
-
-
-			}
-
-		// Posts
-
-			$( ".post" ).each( function() {
-				var p = $(this),
-					i = p.find('.inner'),
-					m = p.find('.more');
-
-				m.addClass('scrolly');
-
-				p.scrollex({
-					top: '40vh',
-					bottom: '40vh',
-					terminate: 	function() { m.removeClass('current'); i.removeClass('current'); },
-					enter: 		function() { m.addClass('current'); i.addClass('current'); },
-					leave: 		function() { m.removeClass('current'); i.removeClass('current'); }
 				});
 
 			});
 
-		// Scrolly.
-			if ( $( ".scrolly" ).length ) {
+		// Footer.
+			$footer.each( function() {
 
-				$('.scrolly').scrolly();
-			}
+				var t 		= jQuery(this),
+					inner 	= t.find('.inner'),
+					button 	= t.find('.info');
 
-		// Menu.
-			$('#menu')
-				.append('<a href="#menu" class="close"></a>')
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'right'
+				button.click(function(e) {
+					t.toggleClass('show');
+					e.preventDefault();
 				});
+
+			});
 
 	});
 
